@@ -1,3 +1,3 @@
 class PlayerController < ApplicationController
 
-ends
+end
