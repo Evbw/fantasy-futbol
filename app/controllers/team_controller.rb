@@ -10,7 +10,10 @@ class TeamController < ApplicationController
   end
 
   post '/teams' do
-
+    @user = User.find_by(id: session[:user_id])
+    @team = Team.create(content: params[:content], user_id: @user.id)
+    @team.save
+    redirect to "/teams/#{@team.id}"
   end
 
 end
