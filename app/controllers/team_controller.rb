@@ -21,4 +21,9 @@ class TeamController < ApplicationController
     erb :'/teams/show_team'
   end
 
+  get '/teams/:id/edit' do
+    @team = Team.find_by_id(params[:id])
+    erb :'teams/edit_team'
+  end
+
 end
