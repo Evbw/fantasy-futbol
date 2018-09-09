@@ -9,4 +9,8 @@ class TeamController < ApplicationController
     erb :'teams/create_team'
   end
 
+  post '/teams' do
+
+  end
+
 end
