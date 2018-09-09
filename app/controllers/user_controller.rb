@@ -4,4 +4,10 @@ class UserController < ApplicationController
     erb :'users/create_user'
   end
 
+  post '/signup' do
+    @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+    @user.save
+    session[:user_id] = @user.id
+  end
+
 end
