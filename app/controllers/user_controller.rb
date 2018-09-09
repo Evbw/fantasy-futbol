@@ -10,4 +10,8 @@ class UserController < ApplicationController
     session[:user_id] = @user.id
   end
 
+  get '/login' do
+    erb :'users/login'
+  end
+
 end
