@@ -1,3 +1,6 @@
+<p>Welcome, <%= current_user.username %></p>
+
 <p><% @teams.each do |team|%>
-  <%= team.content %>
+  <%= team.team_name %>
+  <%= team.team_country %>
 <% end %></p>
