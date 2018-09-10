@@ -1,3 +1,7 @@
 <p><%= @team.team_name %> from <%= @team.team_country %></p>
 
+<form method="post" action="/teams/<%= @team.id %>/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Team">
+</form>
 <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
