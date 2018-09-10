@@ -33,4 +33,9 @@ class TeamController < ApplicationController
    redirect to "/teams/#{@team.id}"
   end
 
+  delete '/teams/:id/delete' do
+    @team.destroy
+    redirect to '/teams'
+  end
+
 end
