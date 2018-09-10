@@ -26,4 +26,11 @@ class TeamController < ApplicationController
     erb :'teams/edit_team'
   end
 
+  patch '/teams/:id' do
+   @team = Team.find(params[:id])
+   @team.update(team_name: params[:team_name])
+   @team.update(team_country: params[:team_country])
+   redirect to "/teams/#{@team.id}"
+  end
+
 end
