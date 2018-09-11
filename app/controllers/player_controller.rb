@@ -21,4 +21,9 @@ class PlayerController < ApplicationController
     erb :'/players/show_player'
   end
 
+  get '/players/:id/edit' do
+    @player = Player.find_by_id(params[:id])
+    erb :'players/edit_player'
+  end
+
 end
