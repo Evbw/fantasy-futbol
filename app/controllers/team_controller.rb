@@ -18,10 +18,19 @@ class TeamController < ApplicationController
   end
 
   post '/teams' do
-    @user = User.find_by(id: session[:user_id])
-    @team = Team.create(content: params[:content], user_id: @user.id)
-    @team.save
-    redirect to "/teams/#{@team.id}"
+    if logged_in?
+      if params[:team_name] == ""
+        redirect to "/teams/new"
+      else
+        @user = User.find_by(id: session[:user_id])
+        @team = Team.create(team_name: params[:team_name], user_id: @user.id)
+        @team = Team.create(team_country: params[:team_country], user_id: @user.id)
+        @team.save
+        redirect to "/teams/#{@team.id}"
+      end
+    else
+      redirect to '/login'
+    end
   end
 
   get '/teams/:id' do
