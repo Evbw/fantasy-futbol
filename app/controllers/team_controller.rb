@@ -4,12 +4,16 @@ class TeamController < ApplicationController
     if logged_in?
       @teams = Team.all
       erb :'teams/teams'
+    else
+      redirect to '/login'
     end
   end
 
   get '/teams/new' do
     if logged_in?
       erb :'teams/create_team'
+    else
+      redirect to '/login'
     end
   end
 
@@ -24,6 +28,8 @@ class TeamController < ApplicationController
     if logged_in?
       @team = Team.find_by_id(params[:id])
       erb :'/teams/show_team'
+    else
+      redirect to '/login'
     end
   end
 
@@ -31,6 +37,8 @@ class TeamController < ApplicationController
     if logged_in?
       @team = Team.find_by_id(params[:id])
       erb :'teams/edit_team'
+    else
+      redirect to '/login'
     end
   end
 
@@ -48,6 +56,8 @@ class TeamController < ApplicationController
       @team = Team.find_by_id(params[:id])
       @team.destroy
       redirect to '/teams'
+    else
+      redirect to '/login'
     end
   end
 
