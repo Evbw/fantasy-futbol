@@ -1,0 +1,7 @@
+<form action='/players/<%= @player.id %>' method='post'>
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="text" name="player_name" value="<%= @player.player_name %>">
+  <input type="text" name="age" value="<%= @player.age %>">
+  <input type="text" name="player_country" value="<%= @player.player_country_of_origin %>">
+  <input type="submit" value="submit">
+</form>
