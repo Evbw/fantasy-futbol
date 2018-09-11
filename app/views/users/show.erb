@@ -1,0 +1,6 @@
+<% current_user.teams.each do |team| %>
+  <%= team.team_name %> of <%= team.team_country %>
+  Comprised of <% current_user.team.players.each do |player| %>
+    <%= player.player_name %>, <%= player.age %> from <%= player.player_country_of_origin %>
+  <% end %>
+<% end %>
