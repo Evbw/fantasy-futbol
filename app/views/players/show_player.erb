@@ -1,3 +1,7 @@
 <p><%= @player.player_name %>, <%= @player.age %> years old from <%= @player.player_country_of_origin %></p>
 
+<form method="post" action="/players/<%= @player.id %>/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Player">
+</form>
 <a href="/players/<%= @player.id %>/edit">Edit Player</a>
