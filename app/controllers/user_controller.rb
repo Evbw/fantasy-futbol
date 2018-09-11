@@ -3,6 +3,8 @@ class UserController < ApplicationController
   get '/signup' do
     if !logged_in?
       erb :'users/create_user'
+    else
+      redirect to '/teams'
     end
   end
 
@@ -15,6 +17,8 @@ class UserController < ApplicationController
   get '/login' do
     if !logged_in?
       erb :'users/login'
+    else
+      redirect to '/teams'
     end
   end
 
@@ -22,6 +26,9 @@ class UserController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      redirect to '/teams'
+    else
+      redirect to '/signup'
     end
   end
 
@@ -31,9 +38,11 @@ class UserController < ApplicationController
   end
 
   get '/logout' do
-    if !logged_in?
+    if logged_in?
       session.destroy
       redirect to '/login'
+    else
+      redirect to '/welcome'
     end
   end
 
