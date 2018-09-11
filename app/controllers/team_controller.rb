@@ -1,12 +1,16 @@
 class TeamController < ApplicationController
 
   get '/teams' do
-    @teams = Team.all
-    erb :'teams/teams'
+    if logged_in?
+      @teams = Team.all
+      erb :'teams/teams'
+    end
   end
 
   get '/teams/new' do
-    erb :'teams/create_team'
+    if logged_in?
+      erb :'teams/create_team'
+    end
   end
 
   post '/teams' do
@@ -17,25 +21,34 @@ class TeamController < ApplicationController
   end
 
   get '/teams/:id' do
-    @team = Team.find_by_id(params[:id])
-    erb :'/teams/show_team'
+    if logged_in?
+      @team = Team.find_by_id(params[:id])
+      erb :'/teams/show_team'
+    end
   end
 
   get '/teams/:id/edit' do
-    @team = Team.find_by_id(params[:id])
-    erb :'teams/edit_team'
+    if logged_in?
+      @team = Team.find_by_id(params[:id])
+      erb :'teams/edit_team'
+    end
   end
 
   patch '/teams/:id' do
    @team = Team.find(params[:id])
-   @team.update(team_name: params[:team_name])
-   @team.update(team_country: params[:team_country])
-   redirect to "/teams/#{@team.id}"
+   if logged_in?
+     @team.update(team_name: params[:team_name])
+     @team.update(team_country: params[:team_country])
+     redirect to "/teams/#{@team.id}"
+   end
   end
 
   delete '/teams/:id/delete' do
-    @team.destroy
-    redirect to '/teams'
+    if logged_in?
+      @team = Team.find_by_id(params[:id])
+      @team.destroy
+      redirect to '/teams'
+    end
   end
 
 end
