@@ -45,7 +45,11 @@ class TeamController < ApplicationController
   get '/teams/:id/edit' do
     if logged_in?
       @team = Team.find_by_id(params[:id])
-      erb :'teams/edit_team'
+      if @team && @team.user == current_user
+         erb :'teams/edit_team'
+       else
+         redirect to '/teams'
+       end
     else
       redirect to '/login'
     end
