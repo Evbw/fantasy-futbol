@@ -5,4 +5,8 @@ class PlayerController < ApplicationController
     erb :'players/players'
   end
 
+  get '/players/new' do
+    erb :'players/create_player'
+  end
+
 end
