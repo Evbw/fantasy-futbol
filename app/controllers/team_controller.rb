@@ -19,7 +19,7 @@ class TeamController < ApplicationController
 
   post '/teams' do
     if logged_in?
-      if params[:team_name] == ""
+      if params[:team_name] == "" || params[:team_country] == ""
         redirect to "/teams/new"
       else
         @user = User.find_by(id: session[:user_id])
@@ -57,10 +57,17 @@ class TeamController < ApplicationController
 
   patch '/teams/:id' do
    @team = Team.find(params[:id])
+   @user = User.find_by(id: session[:user_id])
    if logged_in?
-     @team.update(team_name: params[:team_name])
-     @team.update(team_country: params[:team_country])
-     redirect to "/teams/#{@team.id}"
+     if !params[:team_name].empty? && !params[:team_country].empty? &&@team.user_id == @user.id
+      @team.update(team_name: params[:team_name])
+      @team.update(team_country: params[:team_country])
+      redirect to "/teams/#{@team.id}"
+    elsif params[:team_name].empty? && @team.user_id == @user.id
+      redirect to("/teams/#{@team.id}/edit")
+    elsif !params[:team_name].empty? && @team.user_id != @user.id
+      redirect to("/teams")
+    end
    end
   end
 
