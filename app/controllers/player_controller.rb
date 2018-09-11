@@ -34,4 +34,9 @@ class PlayerController < ApplicationController
     redirect to "/players/#{@player.id}"
   end
 
+  delete '/players/:id/delete' do
+    @player.destroy
+    redirect to '/players'
+  end
+
 end
