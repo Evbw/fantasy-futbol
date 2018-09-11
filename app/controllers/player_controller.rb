@@ -16,4 +16,9 @@ class PlayerController < ApplicationController
     redirect to "/players/#{@player.id}"
   end
 
+  get '/players/:id' do
+    @player = Player.find_by_id(params[:id])
+    erb :'/players/show_player'
+  end
+
 end
