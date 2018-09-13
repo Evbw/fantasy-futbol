@@ -19,7 +19,7 @@ class PlayerController < ApplicationController
 
   post '/players' do
     if logged_in?
-      if params[:player_name] == "" || if params[:age] == "" || if params[:player_country_of_origin] == ""
+      if params[:player_name] == "" || params[:age] == "" || params[:player_country_of_origin] == ""
         redirect to "/players/new"
       else
         @user = User.find_by(id: session[:user_id])
