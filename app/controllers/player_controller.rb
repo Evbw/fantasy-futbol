@@ -19,10 +19,16 @@ class PlayerController < ApplicationController
 
   post '/players' do
     if logged_in?
-      @user = User.find_by(id: session[:user_id])
-      @player = Player.create(content: params[:content], user_id: @user.id)
-      @player.save
-      redirect to "/players/#{@player.id}"
+      if params[:player_name] == "" || if params[:age] == "" || if params[:player_country_of_origin] == ""
+        redirect to "/players/new"
+      else
+        @user = User.find_by(id: session[:user_id])
+        @player = Player.create(player_name: params[:player_name], user_id: @user.id)
+        @player = Player.create(age: params[:age], user_id: @user.id)
+        @player = Player.create(player_country_of_origin: params[:player_country_of_origin], user_id: @user.id)
+        @player.save
+        redirect to "/players/#{@player.id}"
+      end
     else
       redirect to '/login'
     end
