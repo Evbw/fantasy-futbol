@@ -76,8 +76,11 @@ class PlayerController < ApplicationController
 
   delete '/players/:id/delete' do
     if logged_in?
-      @player.destroy
-      redirect to '/players'
+      @player = Player.find_by_id(params[:id])
+      if @player && @player.user == current_user
+        @player.destroy
+        redirect to '/players'
+      end
     else
       redirect to '/login'
     end
