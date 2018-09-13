@@ -46,19 +46,31 @@ class PlayerController < ApplicationController
   get '/players/:id/edit' do
     if logged_in?
       @player = Player.find_by_id(params[:id])
-      erb :'players/edit_player'
+      if @player && @player.user == current_user
+        erb :'players/edit_player'
+      else
+        redirect to '/players'
+      end
     else
       redirect to '/login'
     end
   end
 
   patch '/players/:id' do
+    @player = Player.find(params[:id])
+    @user = User.find_by(id: session[:user_id])
     if logged_in?
-      @player = Player.find(params[:id])
-      @player.update(player_name: params[:player_name])
-      @player.update(age: params[:age])
-      @player.update(player_country_of_origin: params[:player_country_of_origin])
-      redirect to "/players/#{@player.id}"
+      if !params[:player_name].empty? && !params[:player_country_of_origin].empty? && !params[:age].empty? && @team.user_id == @user.id
+        @player = Player.find(params[:id])
+        @player.update(player_name: params[:player_name])
+        @player.update(age: params[:age])
+        @player.update(player_country_of_origin: params[:player_country_of_origin])
+        redirect to "/players/#{@player.id}"
+      elsif params[:player_name].empty? && @player.user_id == @user.id
+        redirect to("/players/#{@player.id}/edit")
+      elsif !params[:player_name].empty? && @player.user_id != @user.id
+        redirect to("/players")
+      end
     end
   end
 
