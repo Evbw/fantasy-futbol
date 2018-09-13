@@ -4,12 +4,16 @@ class PlayerController < ApplicationController
     if logged_in?
       @players = Player.all
       erb :'players/players'
+    else
+      redirect to '/login'
     end
   end
 
   get '/players/new' do
     if logged_in?
       erb :'players/create_player'
+    else
+      redirect to '/login'
     end
   end
 
@@ -19,6 +23,8 @@ class PlayerController < ApplicationController
       @player = Player.create(content: params[:content], user_id: @user.id)
       @player.save
       redirect to "/players/#{@player.id}"
+    else
+      redirect to '/login'
     end
   end
 
@@ -26,6 +32,8 @@ class PlayerController < ApplicationController
     if logged_in?
       @player = Player.find_by_id(params[:id])
       erb :'/players/show_player'
+    else
+      redirect to '/login'
     end
   end
 
@@ -33,6 +41,8 @@ class PlayerController < ApplicationController
     if logged_in?
       @player = Player.find_by_id(params[:id])
       erb :'players/edit_player'
+    else
+      redirect to '/login'
     end
   end
 
@@ -50,6 +60,8 @@ class PlayerController < ApplicationController
     if logged_in?
       @player.destroy
       redirect to '/players'
+    else
+      redirect to '/login'
     end
   end
 
