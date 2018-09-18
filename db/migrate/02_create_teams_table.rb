@@ -1,6 +1,6 @@
 class CreateTeamsTable < ActiveRecord::Migration
   def change
-   create_table :team do |t|
+   create_table :teams do |t|
      t.string :team_name
      t.string :team_country
    end
