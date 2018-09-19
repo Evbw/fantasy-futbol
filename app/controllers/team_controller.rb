@@ -23,8 +23,7 @@ class TeamController < ApplicationController
         redirect to "/teams/new"
       else
         @user = User.find_by(id: session[:user_id])
-        @team = Team.create(team_name: params[:team_name], user_id: @user.id)
-        @team = Team.create(team_country: params[:team_country], user_id: @user.id)
+        @team = Team.create(team_name: params[:team_name], team_country: params[:team_country], user_id: @user.id)
         @team.save
         redirect to "/teams/#{@team.id}"
       end

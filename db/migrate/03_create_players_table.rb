@@ -4,6 +4,7 @@ class CreatePlayersTable < ActiveRecord::Migration
      t.string :player_name
      t.integer :age
      t.string :player_country_of_origin
+     t.integer :team_id
    end
   end
 end
