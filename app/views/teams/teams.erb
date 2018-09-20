@@ -1,6 +1,7 @@
 <p>Welcome, <%= current_user.username %></p>
 
 <p><% @teams.each do |team|%>
-  <%= team.team_name %>
-  <%= team.team_country %>
+  <p><%= team.team_name %> of <%= team.team_country %></p>
 <% end %></p>
+
+<p><a href="/users/show">See your Teams here</a></p>
