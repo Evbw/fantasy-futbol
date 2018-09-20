@@ -42,6 +42,7 @@ class TeamController < ApplicationController
   end
 
   get '/teams/:id/edit' do
+
     if logged_in?
       @team = Team.find_by_id(params[:id])
       if @team && @team.user == current_user
@@ -58,11 +59,11 @@ class TeamController < ApplicationController
    @team = Team.find(params[:id])
    @user = User.find_by(id: session[:user_id])
    if logged_in?
-     if !params[:team_name].empty? && !params[:team_country].empty? && @team.user_id == @user.id
+     if @team.user_id == @user.id
       @team.update(team_name: params[:team_name])
       @team.update(team_country: params[:team_country])
       redirect to "/teams/#{@team.id}"
-    elsif params[:team_name].empty? && @team.user_id == @user.id
+    elsif params[:team_name].empty? || params[:team_country].empty? && @team.user_id == @user.id
       redirect to("/teams/#{@team.id}/edit")
     elsif !params[:team_name].empty? && @team.user_id != @user.id
       redirect to("/teams")
@@ -71,6 +72,7 @@ class TeamController < ApplicationController
   end
 
   delete '/teams/:id/delete' do
+
     if logged_in?
       @team = Team.find_by_id(params[:id])
       if @team && @team.user == current_user
