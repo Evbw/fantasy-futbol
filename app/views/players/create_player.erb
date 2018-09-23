@@ -1,6 +1,11 @@
 <form action='/players' method='post'>
-  <input type="text" name="player_name" placeholder="Player name">
-  <input type="text" name="age" placeholder="Player age">
-  <input type="text" name="player_country_of_origin" placeholder="Player's home country">
+  <p><input type="text" name="player_name" placeholder="Player name"></p>
+  <p><input type="text" name="age" placeholder="Player age"></p>
+  <p><input type="text" name="player_country_of_origin" placeholder="Player's home country"></p>
+  <p><% current_user.teams.all.each do |team| %>
+      <%= team.team_name %>
+      <input id="<%= team.id %>" type="radio" name="figure[team_ids][]" value="<%= team.id %>">
+  <% end %></p>
+
   <input type="submit" value="submit">
 </form>
