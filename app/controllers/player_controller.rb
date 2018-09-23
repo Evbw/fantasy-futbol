@@ -23,7 +23,7 @@ class PlayerController < ApplicationController
         redirect to "/players/new"
       else
         @user = User.find_by(id: session[:user_id])
-        @player = Player.create(player_name: params[:player_name], age: params[:age], player_country_of_origin: params[:player_country_of_origin], user_id: @user.id)
+        @player = Player.create(player_name: params[:player_name], age: params[:age], player_country_of_origin: params[:player_country_of_origin])
         @player.save
         redirect to "/players/#{@player.id}"
       end
