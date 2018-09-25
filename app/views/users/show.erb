@@ -1,8 +1,12 @@
 <% current_user.teams.each do |team| %>
   <%= team.team_name %> of <%= team.team_country %>
-  Comprised of <% current_user.team.players.each do |player| %>
+  Comprised of <% team.players.each do |player| %>
     <%= player.player_name %>, <%= player.age %> from <%= player.player_country_of_origin %>
   <% end %>
 <% end %>
 
-Add a new Team <a href="/teams/new">here</a>
+<p>Add a new Team <a href="/teams/new">here</a></p>
+
+<p>Add a new Player <a href="/players/new">here</a></p>
+
+<p>Log out <a href="/logout">here</a></p>
