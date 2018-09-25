@@ -4,7 +4,7 @@
   <p><input type="text" name="player_country_of_origin" placeholder="Player's home country"></p>
   <p><% current_user.teams.all.each do |team| %>
       <%= team.team_name %>
-      <input id="<%= team.id %>" type="radio" name="user[team_ids][]" value="<%= team.id %>">
+      <input id="<%= team.id %>" type="radio" name="user[team_id]" value="<%= team.id %>">
   <% end %></p>
 
   <input type="submit" value="submit">

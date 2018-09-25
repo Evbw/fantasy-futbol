@@ -72,10 +72,9 @@ class TeamController < ApplicationController
   end
 
   delete '/teams/:id/delete' do
-
     if logged_in?
       @team = Team.find_by_id(params[:id])
-      if @team && @team.user == current_user
+      if @team && @team.user_id == current_user
         @team.destroy
         redirect to '/teams'
       end
