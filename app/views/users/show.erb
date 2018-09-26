@@ -1,7 +1,7 @@
 <% current_user.teams.each do |team| %>
   <%= team.team_name %> of <%= team.team_country %>
-  Comprised of <% team.players.each do |player| %>
-    <%= player.player_name %>, <%= player.age %> from <%= player.player_country_of_origin %>
+  <p>Comprised of <% team.players.each do |player| %></p>
+    <p><%= player.player_name %>, <%= player.age %> from <%= player.player_country_of_origin %></p>
   <% end %>
 <% end %>
 
