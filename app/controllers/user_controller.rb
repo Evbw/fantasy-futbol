@@ -1,11 +1,8 @@
 class UserController < ApplicationController
 
   get '/signup' do
-    if !logged_in?
-      erb :'users/create_user'
-    else
-      redirect to '/teams'
-    end
+    redirect_if_not_logged_in
+    erb :'teams/teams'
   end
 
   post '/signup' do
@@ -20,11 +17,8 @@ class UserController < ApplicationController
   end
 
   get '/login' do
-    if !logged_in?
-      erb :'users/login'
-    else
-      redirect to '/teams'
-    end
+    redirect_if_not_logged_in
+    erb :'teams/teams'
   end
 
   post '/login' do
@@ -43,12 +37,9 @@ class UserController < ApplicationController
   end
 
   get '/logout' do
-    if logged_in?
-      session.destroy
-      redirect to '/login'
-    else
-      redirect to '/welcome'
-    end
+    redirect_if_not_logged_in
+    session.destroy
+    redirect to '/login'
   end
 
 end
